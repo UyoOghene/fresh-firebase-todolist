@@ -38,6 +38,7 @@ googleBtn.addEventListener('click', () => {
     signInWithPopup(auth, provider)
         .then((result) => {
             const user = result.user;
+            console.log(user)
             localStorage.setItem('email', user.email);
             localStorage.setItem('userStore', JSON.stringify(user));
             localStorage.setItem('pic', user.photoURL);
@@ -50,22 +51,13 @@ googleBtn.addEventListener('click', () => {
         });
 });
 
-// onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//         console.log('logged in');
-//         const uid = user.uid;
-//         return uid;
-//     }
-//     else{"create an account and login"};
-// });
-
 function login(e) {
     e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+    localStorage.setItem('username', username);
 
     if (username !== '' && password.length >= 5) {
-        localStorage.setItem('username', username);
         const usernamestore = (localStorage.getItem('username'));
         loginContainer.style.display = 'none';
         container.style.display = 'flex';
@@ -80,7 +72,16 @@ document.querySelector('#login').addEventListener('click', login);
 
 const addToCart = (e) => {
     e.preventDefault();
-    const name = prompt('Enter your name');
+    let name;
+    const user = JSON.parse(localStorage.getItem('userStore'));
+
+    if (user && user.displayName) {
+        name = user.displayName;
+    } else {
+        const usernamestore = localStorage.getItem('username');
+        name = usernamestore;
+    }
+
     const item = inputField.value;
     const d = new Date();
     const date = d.toLocaleDateString('en-US', {
@@ -94,7 +95,6 @@ const addToCart = (e) => {
         inputField.value = '';
     }
 };
-
 inputForm.addEventListener('submit', addToCart);
 
 const onGoogleLogin = () => {
@@ -106,7 +106,6 @@ const onGoogleLogin = () => {
         const pic = user.photoURL;
         imgbox.setAttribute('src', pic);
     }
-    else{"create an account and login"};
 };
 
 const logout = () => {
@@ -121,8 +120,6 @@ const logout = () => {
       };
 
 logoutBtn.addEventListener('click', logout);
-onGoogleLogin();
-
 
 onValue(ref(dataBase, "shoppingList"), (snapshot) => {
     if (snapshot.exists()) {
@@ -134,7 +131,6 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
         shoppingItemList.appendChild(table);
         const headerRow = document.createElement('tr');
         headerRow.setAttribute('id', 'headerRow');
-
         const headers = ['Item', 'User', 'Date'];
         headers.forEach(headerText => {
             const th = document.createElement('th');
