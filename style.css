@@ -11,6 +11,8 @@ body {
 
 .login-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     width: 300px;
     padding: 20px;
@@ -22,6 +24,7 @@ body {
 .login-container h2 {
     margin: 0 0 15px;
     text-align: center;
+    
 }
 
 .login-container label {
@@ -30,11 +33,19 @@ body {
 }
 
 .login-container input {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     margin: 5px 0 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
+}
+
+#form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
 }
 
 #login {
@@ -120,30 +131,33 @@ body {
 }
 
 #imgbox {
+    display: none;
     height: 3em;
     width: 3em;
     border-radius: 100%;
 }
 
 #namebox {
-    display: flex;
+    display: none;
     text-align: center;
     align-items: center;
     justify-content: center;
     min-width: 5em;
     width: fit-content;
     height: 1em;
-    background-color: #f3cfec;
+    background-color: #efa2e0;
     border: none;
     border-radius: 20px;
     padding: 5px;
     font-size: 15px;
+    color: #07080e;
 }
 
 #logoutBtn {
     background-color: rgb(210, 90, 90);
     border-radius: 20px;
     border: none;
+    width: 100%;
 }
 
 #logoutBtn:hover {
