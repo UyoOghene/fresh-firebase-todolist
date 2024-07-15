@@ -17,38 +17,51 @@
 
     <title>Google Login</title>
 </head>
-<body>
-    <div class="login-container"> 
-        <h2>Login</h2>
-        <form id="form">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password">
-            <button id="login" type="submit">Login</button>
-            <button type="button" id="googleBtn">Login with Google<i class="fa fa-google-plus" ></i></button>
-        </form>
-    </div>
 
-    <div id="container">
-        <div class="dropdown">
-            <button class="dropbtn">
-                <div id="picturebox"><img id="imgbox" alt="" ></div>
-            </button>
-            <div class="dropdown-content">
-                <div id="namebox" ></div>
-                <button id="logoutBtn">Logout</button>            
+<body>
+    <div class="main-container">
+        <div class="login-container"> 
+            <h2>Login</h2>
+            <form id="form">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <button id="login" type="submit">Login</button>
+                <button type="button" id="googleBtn">Login with Google<i class="fa fa-google-plus" ></i></button>
+            </form>
+        </div>
+
+        <div id="container">
+            <div class="dropdown-container">
+                <div id="notification"><img src="./images/notifications icon.png" class="icons" alt=""></div>
+                <div id="messages"><img src="./images/messages icon.png" class="icons" alt=""></div>
+                <div id="insights"><img src="./images/insights icon.png" alt="" class="icons"></div>
+            
+
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <div id="picturebox"><img id="imgbox" alt="" ></div>
+                    </button>
+                    <div class="dropdown-content">
+                        <div id="namebox" ></div>
+                        <button id="logoutBtn"  class="icons">Logout <img src="./images/logout icon.jpg" class="dropicons" alt=""></button>
+                        <div id="display" class="icons"><img src="./images/display icon.jpeg" class="dropicons" alt="">display</div>
+                        <div id="help" class="icons"><img src="./images/help-252.png" class="dropicons"  >help</div>            
+                    </div>
+                </div>
+            </div>
+            <div id="card">
+                <img src="./cart.png" id="cart">
+                <form action="" id="add-btn-field">
+                    <input type="text" placeholder="type an item" id="input-field">
+                    <button id="add-button">Add to cart</button>
+                </form>
+                <div id="shopping-item-list"></div>
             </div>
         </div>
-        <div id="card">
-            <img src="./cart.png" id="cart">
-            <form action="" id="add-btn-field">
-                <input type="text" placeholder="type an item" id="input-field">
-                <button id="add-button">Add to cart</button>
-            </form>
-            <div id="shopping-item-list"></div>
-        </div>
     </div>
-
 </body>
 </html>
+
+

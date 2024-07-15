@@ -7,6 +7,20 @@ body {
     margin: 0;
     background-color: #f7f7f7;
     user-select: none;
+    overflow: hidden;
+}
+
+.main-container {
+    width: 100%;
+}
+.icons{
+    height: 20px;
+    width: 20px;
+}
+.icons img {
+    height: 20px;
+    width: 20px;
+  
 }
 
 .login-container {
@@ -19,12 +33,12 @@ body {
     background-color: rgb(183, 213, 249);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    margin: 20px auto;
 }
 
 .login-container h2 {
     margin: 0 0 15px;
     text-align: center;
-    
 }
 
 .login-container label {
@@ -40,12 +54,11 @@ body {
     border-radius: 10px;
 }
 
-#form{
+#form {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-   
 }
 
 #login {
@@ -84,6 +97,13 @@ body {
     background-color: #f0dbec;
 }
 
+.dropdown-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 10px;
+}
+
 .dropbtn {
     color: white;
     padding: 10px;
@@ -107,7 +127,48 @@ body {
     z-index: 1;
     border-radius: 20px;
     border: none;
+    right: 0;
 }
+
+#messages  {
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #d1aaec;
+
+} 
+#notification  {
+    padding: 10px;
+    border-radius: 30px;
+    background-color: #d1aaec;
+
+} 
+#insights  {
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #d1aaec;
+
+} 
+
+.dropicons{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding-right: 20px;
+}
+
+.dropdown-content .icons {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-content .icons img {
+    margin-right: 10px;
+}
+
+.dropdown-content .icons span {
+    margin-left: 10px; 
+}
+
 
 .dropdown:hover .dropdown-content {
     display: block;
@@ -286,7 +347,14 @@ body {
     border: none;
     border-collapse: collapse;
     border: 1px solid #f0dbec;
-    padding: 5px;
+    padding: 10px;
     border-radius: 10px;
-    border-style: none;
+}
+
+#div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
