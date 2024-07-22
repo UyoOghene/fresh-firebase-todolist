@@ -80,33 +80,55 @@ signupBtn.addEventListener('click',signUpFunc);
 const getUserDetails =(e)=>{
     e.preventDefault();
     console.log('submitsignup');
-    if(email.value === '' || firstname.value === ''){
+    if(email.value === '' || firstname.value === '' ){
      alert('Fill up the form')   
     }else{
-        form.style.display = 'flex'
-        signUpform.style.display = 'none';
-        titleh2.textContent = 'Log In';
-        console.log(firstname.value);
-        console.log(email.value);
-        console.log(signUpassword.value);
-        console.log(confirmpassword.value);   
-
+       backtologin()  
     }
+
+    if(validatePassword() === true){
+        backtologin();
+    }
+    if(validatePassword()=== false){
+        alert('invalid password')
+    }
+      
+    
     if (confirmpassword.value !== signUpassword.value ){
         alert('Passwords are not the same');
         confirmpassword.value ='';
         signUpassword.value = '';
+    } 
+    else {
+    backtologin()  
+  }
+}
+
+signUpSubmit.addEventListener('click', getUserDetails);
+
+function backtologin(){
+    form.style.display = 'flex'
+    signUpform.style.display = 'none';
+    titleh2.textContent = 'Log In';
+    console.log(firstname.value);
+    console.log(email.value);
+    console.log(signUpassword.value);
+    console.log(confirmpassword.value);   
+
+}
+function validatePassword(password) {
+    const minLength = 5;
+    const hasUpperCase = /[A-Z]/.test(signUpassword.value);
+    const hasLowerCase = /[a-z]/.test(signUpassword.value);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(signUpassword.value);
+    const hasMinLength = signUpassword.value.length >= minLength;
+
+    if (hasUpperCase && hasLowerCase && hasSpecialChar && hasMinLength) {
+        return true;
     } else {
-        form.style.display = 'flex'
-        signUpform.style.display = 'none';
-        titleh2.textContent = 'Log In';
-        console.log(firstname.value);
-        console.log(email.value);
-        console.log(signUpassword.value);
-        console.log(confirmpassword.value);   
+        return false;
     }
 }
-signUpSubmit.addEventListener('click', getUserDetails);
 
 
 function login(e) {
@@ -160,7 +182,6 @@ inputForm.addEventListener('submit', addToCart);
 
 const onGoogleLogin = () => {
     const email = localStorage.getItem('email');
-    
     if (email) {
         namebox.style.display = 'flex';
         imgbox.style.display = 'flex';
