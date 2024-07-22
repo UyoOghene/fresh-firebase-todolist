@@ -38,11 +38,15 @@ const imgbox = document.querySelector('#imgbox');
 const picturebox = document.querySelector('#picturebox');
 const logoutBtn = document.querySelector('#logoutBtn');
 const signupBtn = document.querySelector('#signup-btn');
+const titleh2 = document.querySelector('#titleh2');
 const signUpform = document.querySelector('#signUp');
 const firstname = document.querySelector('#firstname');
 const email = document.querySelector('#email');
 const form = document.querySelector('#form');
 const signUpSubmit = document.querySelector('#signUpSubmit');
+const confirmpassword = document.querySelector('#confirmpassword');
+const signUpassword = document.querySelector('#signUpassword');
+const password = document.querySelector('#password');
 
 
 googleBtn.addEventListener('click', () => {
@@ -67,21 +71,41 @@ const signUpFunc =(e) =>{
     console.log('signup');
     form.style.display = 'none'
     signUpform.style.display = 'flex';
-    
+    titleh2.textContent = 'Sign UP'
 }
+
 
 signupBtn.addEventListener('click',signUpFunc);
 
 const getUserDetails =(e)=>{
     e.preventDefault();
-    console.log('hi');
-    console.log(firstname.value);
-    console.log(email.value);
-    firstname.value = '';
-    email.value = '';
+    console.log('submitsignup');
+    if(email.value === '' || firstname.value === ''){
+     alert('Fill up the form')   
+    }else{
+        form.style.display = 'flex'
+        signUpform.style.display = 'none';
+        titleh2.textContent = 'Log In';
+        console.log(firstname.value);
+        console.log(email.value);
+        console.log(signUpassword.value);
+        console.log(confirmpassword.value);   
 
+    }
+    if (confirmpassword.value !== signUpassword.value ){
+        alert('Passwords are not the same');
+        confirmpassword.value ='';
+        signUpassword.value = '';
+    } else {
+        form.style.display = 'flex'
+        signUpform.style.display = 'none';
+        titleh2.textContent = 'Log In';
+        console.log(firstname.value);
+        console.log(email.value);
+        console.log(signUpassword.value);
+        console.log(confirmpassword.value);   
+    }
 }
-// signUpform.addEventListener('submit', getUserDetails);
 signUpSubmit.addEventListener('click', getUserDetails);
 
 
