@@ -61,6 +61,8 @@ googleBtn.addEventListener('click', () => {
         })
         .catch((error) => {
             console.error(error.code, error.message);
+            alert('Failed to sign in. Please check your email and password.');
+        
         });
 });
 
@@ -80,17 +82,17 @@ signUpSubmit.addEventListener('click', (e) => {
     const confirmPasswordValue = confirmpassword.value;
     
     if(emailValue === '' || firstname.value === '' ){
-        alert('Fill up the form');
+        alert('Fill out all fields');
         return;
     }
 
     if(!validatePassword(passwordValue)){
-        alert('Invalid password');
+        alert('Password must be at least 5 characters long, contain an uppercase letter, a lowercase letter, and a special character.');
         return;
     }
 
     if (passwordValue !== confirmPasswordValue){
-        alert('Passwords are not the same');
+        alert('Passwords do not match.');
         confirmpassword.value = '';
         signUpassword.value = '';
         return;
@@ -121,6 +123,9 @@ document.querySelector('#login').addEventListener('click', (e) => {
             container.style.display = 'flex';
             dropbtn.removeChild(picturebox);
             dropbtn.appendChild(namebox);
+            namebox.style.marginTop = '60px'
+            namebox.style.right = '60px'
+            namebox.style.marginRight = '60px'
             namebox.textContent = emailValue;
             namebox.style.display = 'flex';
             imgbox.style.display = 'none';
@@ -150,33 +155,6 @@ function backtologin(){
     console.log(confirmpassword.value);
 }
 
-const addToCart = (e) => {
-    e.preventDefault();
-    let name;
-    const user = JSON.parse(localStorage.getItem('userStore'));
-
-    if (user && user.displayName) {
-        name = user.displayName;
-    } else {
-        const usernamestore = localStorage.getItem('username');
-        name = usernamestore;
-    }
-
-    const item = inputField.value;
-    const d = new Date();
-    const date = d.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-    });
-
-    if (name !== null && item.trim() !== '') {
-        push(ref(dataBase, "shoppingList"), { item, user: name, date, completed: false });
-        inputField.value = '';
-    }
-};
-
-inputForm.addEventListener('submit', addToCart);
 
 const onGoogleLogin = () => {
     const email = localStorage.getItem('email');
@@ -265,3 +243,31 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
         shoppingItemList.innerHTML = "No items";
     }
 });
+
+const addToCart = (e) => {
+    e.preventDefault();
+    let name;
+    const user = JSON.parse(localStorage.getItem('userStore'));
+
+    if (user && user.displayName) {
+        name = user.displayName;
+    } else {
+        const usernamestore = localStorage.getItem('username');
+        name = usernamestore;
+    }
+
+    const item = inputField.value;
+    const d = new Date();
+    const date = d.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+
+    if (name !== null && item.trim() !== '') {
+        push(ref(dataBase, "shoppingList"), { item, user: name, date, completed: false });
+        inputField.value = '';
+    }
+};
+
+inputForm.addEventListener('submit', addToCart);

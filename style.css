@@ -285,17 +285,21 @@ align-items: center;
 
 #namebox {
     display: none;
+    margin-top: 20px;
+    padding: 10px;
     text-align: center;
     align-items: center;
     justify-content: center;
     min-width: 5em;
-    width: fit-content;
+    width: 5em;
+    /* right: 20px; */
     height: 1em;
-    background-color: #efa2e0;
+    /* background-color: #efa2e0; */
     border: none;
     border-radius: 20px;
     padding: 5px;
-    font-size: 15px;
+    font-size: 12px;
+    font-weight: bold;
     color: #07080e;
 }
 
@@ -307,11 +311,11 @@ align-items: center;
 }
 
 #logoutBtn:hover {
-    /* background-color: rgb(189, 114, 114); */
+    background-color: rgb(196, 127, 127);
     border-radius: 20px;
     border: none;
     font-weight: bolder;
-    font-size: larger;
+    font-size: medium;
 }
 
 #card {
