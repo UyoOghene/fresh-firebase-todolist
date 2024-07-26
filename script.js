@@ -1,5 +1,6 @@
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 import { getDatabase, ref, onValue, push, remove, update } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 window.env = {
@@ -47,6 +48,7 @@ const confirmpassword = document.querySelector('#confirmpassword');
 const signUpassword = document.querySelector('#signUpassword');
 const password = document.querySelector('#password');
 
+
 googleBtn.addEventListener('click', () => {
     signInWithPopup(auth, provider)
         .then((result) => {
@@ -61,103 +63,104 @@ googleBtn.addEventListener('click', () => {
         })
         .catch((error) => {
             console.error(error.code, error.message);
-            alert('Failed to sign in. Please check your email and password.');
-        
         });
 });
 
-signupBtn.addEventListener('click', (e) => {
+const signUpFunc =(e) =>{
     e.preventDefault();
     console.log('signup');
-    form.style.display = 'none';
+    form.style.display = 'none'
     signUpform.style.display = 'flex';
-    titleh2.textContent = 'Sign UP';
-});
+    titleh2.textContent = 'Sign UP'
+}
 
-signUpSubmit.addEventListener('click', (e) => {
+
+signupBtn.addEventListener('click',signUpFunc);
+
+const getUserDetails =(e)=>{
     e.preventDefault();
     console.log('submitsignup');
-    const emailValue = email.value;
-    const passwordValue = signUpassword.value;
-    const confirmPasswordValue = confirmpassword.value;
-    
-    if(emailValue === '' || firstname.value === '' ){
-        alert('Fill out all fields');
-        return;
-    }
+    if(email.value === '' || firstname.value === ''){
+     alert('Fill up the form')   
+    }else{
+        form.style.display = 'flex'
+        signUpform.style.display = 'none';
+        titleh2.textContent = 'Log In';
+        console.log(firstname.value);
+        console.log(email.value);
+        console.log(signUpassword.value);
+        console.log(confirmpassword.value);   
 
-    if(!validatePassword(passwordValue)){
-        alert('Password must be at least 5 characters long, contain an uppercase letter, a lowercase letter, and a special character.');
-        return;
     }
-
-    if (passwordValue !== confirmPasswordValue){
-        alert('Passwords do not match.');
-        confirmpassword.value = '';
+    if (confirmpassword.value !== signUpassword.value ){
+        alert('Passwords are not the same');
+        confirmpassword.value ='';
         signUpassword.value = '';
-        return;
+    } else {
+        form.style.display = 'flex'
+        signUpform.style.display = 'none';
+        titleh2.textContent = 'Log In';
+        console.log(firstname.value);
+        console.log(email.value);
+        console.log(signUpassword.value);
+        console.log(confirmpassword.value);   
+    }
+}
+signUpSubmit.addEventListener('click', getUserDetails);
+
+
+function login(e) {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    localStorage.setItem('username', username);
+
+    if (username !== '' && password.length >= 5) {
+        const usernamestore = (localStorage.getItem('username'));
+        loginContainer.style.display = 'none';
+        container.style.display = 'flex';
+        dropbtn.removeChild(picturebox);
+        dropbtn.appendChild(namebox);
+        namebox.textContent = usernamestore;
+        namebox.style.display = 'flex';
+        imgbox.style.display = 'none';
+    } else {
+        alert('Your password should be at least 5 characters');
+    }
+}
+
+document.querySelector('#login').addEventListener('click', login);
+
+const addToCart = (e) => {
+    e.preventDefault();
+    let name;
+    const user = JSON.parse(localStorage.getItem('userStore'));
+
+    if (user && user.displayName) {
+        name = user.displayName;
+    } else {
+        const usernamestore = localStorage.getItem('username');
+        name = usernamestore;
     }
 
-    createUserWithEmailAndPassword(auth, emailValue, passwordValue)
-        .then((userCredential) => {
-            console.log('User signed up:', userCredential.user);
-            backtologin();
-        })
-        .catch((error) => {
-            console.error('Sign up error', error.message);
-        });
-});
+    const item = inputField.value;
+    const d = new Date();
+    const date = d.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
 
-document.querySelector('#login').addEventListener('click', (e) => {
-    e.preventDefault();
-    const emailValue = document.querySelector('#username').value;
-    const passwordValue = document.querySelector('#password').value;
-
-    signInWithEmailAndPassword(auth, emailValue, passwordValue)
-        .then((userCredential) => {
-            console.log('User signed in:', userCredential.user);
-            localStorage.setItem('email', userCredential.user.email);
-            localStorage.setItem('userStore', JSON.stringify(userCredential.user));
-            localStorage.setItem('username', emailValue);
-            loginContainer.style.display = 'none';
-            container.style.display = 'flex';
-            dropbtn.removeChild(picturebox);
-            dropbtn.appendChild(namebox);
-            namebox.style.marginTop = '60px'
-            namebox.style.right = '60px'
-            namebox.style.marginRight = '60px'
-            namebox.textContent = emailValue;
-            namebox.style.display = 'flex';
-            imgbox.style.display = 'none';
-        })
-        .catch((error) => {
-            console.error('Sign in error', error.message);
-        });
-});
-
-function validatePassword(password) {
-    const minLength = 5;
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    const hasMinLength = password.length >= minLength;
-
-    return hasUpperCase && hasLowerCase && hasSpecialChar && hasMinLength;
-}
-
-function backtologin(){
-    form.style.display = 'flex';
-    signUpform.style.display = 'none';
-    titleh2.textContent = 'Log In';
-    console.log(firstname.value);
-    console.log(email.value);
-    console.log(signUpassword.value);
-    console.log(confirmpassword.value);
-}
-
+    if (name !== null && item.trim() !== '') {
+        push(ref(dataBase, "shoppingList"), { item, user: name, date, completed: false });
+        inputField.value = '';
+    }
+};
+inputForm.addEventListener('submit', addToCart);
 
 const onGoogleLogin = () => {
     const email = localStorage.getItem('email');
+    
     if (email) {
         namebox.style.display = 'flex';
         imgbox.style.display = 'flex';
@@ -169,16 +172,17 @@ const onGoogleLogin = () => {
     }
 };
 
+
 const logout = () => {
-    signOut(auth).then(() => {
-        localStorage.removeItem('email');
-        localStorage.removeItem('username');
-        localStorage.removeItem('userStore');
-        window.location.href = './index.html';
-    }).catch((error) => {
-        console.error('Sign out error', error);
-    });
-};
+        signOut(auth).then(() => {
+          localStorage.removeItem('email');
+          localStorage.removeItem('username');
+          localStorage.removeItem('userStore');
+          window.location.href = './index.html';
+        }).catch((error) => {
+          console.error('Sign out error', error);
+        });
+      };
 
 logoutBtn.addEventListener('click', logout);
 
@@ -218,56 +222,22 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
                 row.style.textDecoration = 'line-through';
             }
 
+            row.addEventListener('click', () => {
+                const exactLocation = ref(dataBase, `shoppingList/${key}`);
+                update(exactLocation, { completed: !completed });
+            });
+
             row.addEventListener('dblclick', () => {
-                const updatedCompleted = !completed;
-                update(ref(dataBase, `shoppingList/${key}`), { completed: updatedCompleted });
-                row.style.textDecoration = updatedCompleted ? 'line-through' : 'none';
-            });
-
-            row.addEventListener('click', (e) => {
-                if (e.detail === 1) {
-                    timeout = setTimeout(() => {
-                        row.classList.toggle('selected');
-                    }, 200);
-                }
-            });
-
-            row.addEventListener('contextmenu', (e) => {
-                e.preventDefault();
-                clearTimeout(timeout);
-                remove(ref(dataBase, `shoppingList/${key}`));
-                table.removeChild(row);
+                const exactLocation = ref(dataBase, `shoppingList/${key}`);
+                remove(exactLocation);
             });
         });
     } else {
-        shoppingItemList.innerHTML = "No items";
+        shoppingItemList.innerHTML = 'No items here... add an item';
     }
 });
 
-const addToCart = (e) => {
-    e.preventDefault();
-    let name;
-    const user = JSON.parse(localStorage.getItem('userStore'));
-
-    if (user && user.displayName) {
-        name = user.displayName;
-    } else {
-        const usernamestore = localStorage.getItem('username');
-        name = usernamestore;
-    }
-
-    const item = inputField.value;
-    const d = new Date();
-    const date = d.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-    });
-
-    if (name !== null && item.trim() !== '') {
-        push(ref(dataBase, "shoppingList"), { item, user: name, date, completed: false });
-        inputField.value = '';
-    }
-};
-
-inputForm.addEventListener('submit', addToCart);
+// Add event listener to dropbtn
+dropbtn.addEventListener('click', () => {
+    dropDownContent.style.display = dropDownContent.style.display === 'block' ? 'none' : 'block';
+});
