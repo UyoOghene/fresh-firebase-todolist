@@ -13,6 +13,43 @@ body {
     overflow: hidden;
 }
 
+
+.login-container h2 {
+    margin: 0 0 15px;
+    text-align: center;
+}
+
+.login-container label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+
+.requirements {
+    display: none;
+    background-color: #3e979f;
+    border: none;
+    padding: 1px;
+    border-radius: 10px;
+    width: 80%;
+    margin-top: 1px;
+    font-size: 10px;
+    z-index: 2;
+}
+
+.requirements ul {
+    margin: 0;
+    padding-right: 5px;
+    padding-bottom: 1px;
+    margin-bottom: 1px;
+}
+
+.requirements ul li {
+    margin-bottom: 1px;
+    padding-bottom: 1px;
+}
+
+
 .main-container {
     display: flex;
     justify-content: center;
@@ -58,6 +95,20 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 1px;
+    row-gap: 1px;
+
+}
+#signUp label {
+    height: 1.5em;
+    margin : 1px;
+    padding: 1px;
+}
+
+
+#signUp input {
+    height: 1.5em;
+    margin-bottom: 1px;
 }
 
 
@@ -86,8 +137,10 @@ body {
 
 .login-container input {
     width: 80%;
-    padding: 10px;
-    margin: 5px 0 10px;
+    height: 2em;
+
+    padding: 2px;
+    margin: 2px 0 3px;
     border: 1px solid #ccc;
     border-radius: 10px;
 }
@@ -99,7 +152,17 @@ body {
     flex-direction: column;
     row-gap: 5px;
     padding: 5px;
-    margin: 5px;
+    margin: 2px;
+}
+#signUpassword{
+    height: 2em;
+  
+}
+
+#form input{
+    height: 2em;
+    margin: 2px;
+
 }
 
 #login {
@@ -295,9 +358,7 @@ align-items: center;
     justify-content: center;
     min-width: 5em;
     width: 5em;
-    /* right: 20px; */
     height: 1em;
-    /* background-color: #efa2e0; */
     border: none;
     border-radius: 20px;
     padding: 5px;

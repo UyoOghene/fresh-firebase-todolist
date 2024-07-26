@@ -49,6 +49,36 @@ const signUpassword = document.querySelector('#signUpassword');
 const password = document.querySelector('#password');
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('signUpassword');
+    const passwordRequirements = document.getElementById('password-requirements');
+
+    passwordInput.addEventListener('focus', () => {
+        passwordRequirements.style.display = 'block';
+    });
+
+    passwordInput.addEventListener('blur', () => {
+        passwordRequirements.style.display = 'none';
+    });
+
+    passwordInput.addEventListener('input', () => {
+        const value = passwordInput.value;
+        const requirements = [
+            value.length >= 8,
+            /[A-Z]/.test(value),
+            /[a-z]/.test(value),
+            /[0-9]/.test(value),
+            /[^A-Za-z0-9]/.test(value)
+        ];
+        
+        const listItems = passwordRequirements.querySelectorAll('li');
+        listItems.forEach((item, index) => {
+            item.style.color = requirements[index] ? 'green' : 'red';
+        });
+    });
+});
+
+
 googleBtn.addEventListener('click', () => {
     signInWithPopup(auth, provider)
         .then((result) => {
@@ -65,6 +95,7 @@ googleBtn.addEventListener('click', () => {
             console.error(error.code, error.message);
         });
 });
+
 
 const signUpFunc =(e) =>{
     e.preventDefault();
