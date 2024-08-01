@@ -50,12 +50,6 @@ const password = document.querySelector('#password');
 const notificationIcon = document.querySelector('#notification');
 const card = document.querySelector('.card');
 
-// document.addEventListener('DOMContentLoaded', () => {
-
-//     notificationIcon.addEventListener('click', () => {
-//         document.body.classList.toggle('dark-theme');
-//     });
-// });
 
 
 notificationIcon.addEventListener('click', () => {

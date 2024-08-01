@@ -517,8 +517,8 @@ align-items: center;
 }
 
 .dark-theme {
-    background-color: #35343407;
-    color: #ffffff;
+    background-color: #0c0c0cb1;
+    /* color: #ffffff; */
 }
 
 
