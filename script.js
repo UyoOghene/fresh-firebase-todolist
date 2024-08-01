@@ -48,14 +48,77 @@ const confirmpassword = document.querySelector('#confirmpassword');
 const signUpassword = document.querySelector('#signUpassword');
 const password = document.querySelector('#password');
 const notificationIcon = document.querySelector('#notification');
+const themeIcon = document.querySelector('#insights');
 const card = document.querySelector('.card');
 
 
 
-notificationIcon.addEventListener('click', () => {
-    // container.classList.toggle('dark-theme');
+themeIcon.addEventListener('click', () => {
     card.classList.toggle('dark-theme');
+    const user = auth.currentUser;
+    if (user) {
+        const userId = user.uid;
+        const themePreference = card.classList.contains('dark-theme') ? 'dark' : 'light';
+        update(ref(dataBase, `users/${userId}`), { theme: themePreference });
+    }
 });
+
+const applyThemePreference = (userId) => {
+    const themeRef = ref(dataBase, `users/${userId}/theme`);
+    onValue(themeRef, (snapshot) => {
+        if (snapshot.exists()) {
+            const themePreference = snapshot.val();
+            if (themePreference === 'dark') {
+                card.classList.add('dark-theme');
+            } else {
+                card.classList.remove('dark-theme');
+            }
+        }
+    });
+};
+
+const onGoogleLogin = () => {
+    const user = auth.currentUser;
+    if (user) {
+        const email = user.email;
+        const userId = user.uid;
+        localStorage.setItem('email', email);
+        localStorage.setItem('userStore', JSON.stringify(user));
+        localStorage.setItem('pic', user.photoURL);
+        namebox.style.display = 'flex';
+        imgbox.style.display = 'flex';
+        const pic = user.photoURL;
+        const name = user.displayName;
+        namebox.textContent = name;
+        imgbox.setAttribute('src', pic);
+        applyThemePreference(userId); 
+    }
+};
+
+const login = (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    localStorage.setItem('username', username);
+
+    if (username !== '' && password.length >= 5) {
+        const user = auth.currentUser;
+        const usernamestore = localStorage.getItem('username');
+        loginContainer.style.display = 'none';
+        container.style.display = 'flex';
+        dropbtn.removeChild(picturebox);
+        dropbtn.appendChild(namebox);
+        namebox.textContent = usernamestore;
+        namebox.style.display = 'flex';
+        imgbox.style.display = 'none';
+        if (user) {
+            applyThemePreference(user.uid);  // Apply theme preference
+        }
+    } else {
+        alert('Your password should be at least 5 characters');
+    }
+};
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('signUpassword');
@@ -148,25 +211,6 @@ const getUserDetails =(e)=>{
 signUpSubmit.addEventListener('click', getUserDetails);
 
 
-function login(e) {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    localStorage.setItem('username', username);
-
-    if (username !== '' && password.length >= 5) {
-        const usernamestore = (localStorage.getItem('username'));
-        loginContainer.style.display = 'none';
-        container.style.display = 'flex';
-        dropbtn.removeChild(picturebox);
-        dropbtn.appendChild(namebox);
-        namebox.textContent = usernamestore;
-        namebox.style.display = 'flex';
-        imgbox.style.display = 'none';
-    } else {
-        alert('Your password should be at least 5 characters');
-    }
-}
 
 document.querySelector('#login').addEventListener('click', login);
 
@@ -196,20 +240,6 @@ const addToCart = (e) => {
     }
 };
 inputForm.addEventListener('submit', addToCart);
-
-const onGoogleLogin = () => {
-    const email = localStorage.getItem('email');
-    
-    if (email) {
-        namebox.style.display = 'flex';
-        imgbox.style.display = 'flex';
-        const user = JSON.parse(localStorage.getItem('userStore'));
-        const pic = user.photoURL;
-        const name = user.displayName;
-        namebox.textContent = name;
-        imgbox.setAttribute('src', pic);
-    }
-};
 
 
 const logout = () => {
