@@ -1,4 +1,4 @@
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,6 +74,94 @@
                 </div>
             </div>
             <div id="card">
+                <img src="./cart.png" id="cart">
+                <form action="" id="add-btn-field">
+                    <input type="text" placeholder="type an item" id="input-field">
+                    <button id="add-button">Add to cart</button>
+                </form>
+                <div id="shopping-item-list"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer type="module" src="./script.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png"  href="/images/favicon.ico">
+    <link rel="android-chrome-icon" type="image/png" sizes="192x192" href="/images/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/images/android-chrome-512x512.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <title>Google Login</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="login-container"> 
+            <h2 id="titleh2">Login</h2>
+            <form id="form">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <button id="login" type="submit">Login</button>
+                <button type="button" id="googleBtn">Login with Google<i class="fa fa-google-plus" ></i></button>
+                <button id="signup-btn">Create Account</button>
+
+            </form>
+            <form id="signUp">
+                <label for="firstname">Firstname</label>
+                <input type="text" id="firstname" name="firstname">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email">
+                <label for="password">password</label>
+                <input type="password" id="signUpassword" name="password">
+                <div id="password-requirements" class="requirements">
+                    <p>Password must contain:</p>
+                    <ul>
+                        <li>At least 8 characters</li>
+                        <li>One uppercase letter</li>
+                        <li>One lowercase letter</li>
+                        <li>One number</li>
+                        <li>One special character</li>
+                    </ul>
+                </div>
+                <label for="confirmP">confirm password</label>
+                <input type="password" id="confirmpassword" name="confirmP">
+                <button id="signUpSubmit">submit</button>
+            </form>
+
+        </div>
+
+        <div id="container">
+            <div class="dropdown-container">
+                <div id="notification"><img src="./images/notifications icon.png" class="icons" alt=""></div>
+                <div id="messages"><img src="./images/messages icon.png" class="icons" alt=""></div>
+                <div id="insights"><img src="./images/insights icon.png" alt="" class="icons"></div>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <div id="picturebox"><img id="imgbox" alt="" ></div>
+                    </button>
+                    <div class="dropdown-content">
+                        <div id="namebox" ></div>
+                        <button id="logoutBtn"  class="icons"> <img src="./images/logout icon.jpg" class="dropicons" alt="">Logout</button>
+                        <div id="Display" class="icons"><img src="./images/display icon.jpeg" class="dropicons" alt="">Display</div>
+                        <div id="Help" class="icons"><img src="./images/help-252.png" class="dropicons"  >Help</div>            
+                    </div>
+                </div>
+            </div>
+            <div class="card">
                 <img src="./cart.png" id="cart">
                 <form action="" id="add-btn-field">
                     <input type="text" placeholder="type an item" id="input-field">

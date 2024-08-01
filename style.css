@@ -14,6 +14,8 @@ body {
 }
 
 
+
+
 .login-container h2 {
     margin: 0 0 15px;
     text-align: center;
@@ -382,7 +384,7 @@ align-items: center;
     font-size: medium;
 }
 
-#card {
+.card {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -512,4 +514,20 @@ align-items: center;
     border-radius: 10px;
     padding: 5px;
     border: none;
+}
+
+.dark-theme {
+    background-color: #35343407;
+    color: #ffffff;
+}
+
+
+.dark-theme input {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-theme button {
+    background-color: #444;
+    color: #fff;
 }

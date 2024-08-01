@@ -47,7 +47,21 @@ const signUpSubmit = document.querySelector('#signUpSubmit');
 const confirmpassword = document.querySelector('#confirmpassword');
 const signUpassword = document.querySelector('#signUpassword');
 const password = document.querySelector('#password');
+const notificationIcon = document.querySelector('#notification');
+const card = document.querySelector('.card');
 
+// document.addEventListener('DOMContentLoaded', () => {
+
+//     notificationIcon.addEventListener('click', () => {
+//         document.body.classList.toggle('dark-theme');
+//     });
+// });
+
+
+notificationIcon.addEventListener('click', () => {
+    // container.classList.toggle('dark-theme');
+    card.classList.toggle('dark-theme');
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('signUpassword');
