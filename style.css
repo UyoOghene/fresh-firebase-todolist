@@ -489,6 +489,10 @@ align-items: center;
     border-collapse: collapse;
     border-radius: 10px;
 }
+#editImg{
+    height:1em ;
+    width: 1em;
+}
 
 #emptyList:hover {
     background-color: rgba(110, 114, 105, 0.263);

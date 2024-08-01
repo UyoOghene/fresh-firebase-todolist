@@ -255,6 +255,63 @@ const logout = () => {
 
 logoutBtn.addEventListener('click', logout);
 
+// onValue(ref(dataBase, "shoppingList"), (snapshot) => {
+//     if (snapshot.exists()) {
+//         const items = snapshot.val();
+//         shoppingItemList.innerHTML = '';
+//         const table = document.createElement('table');
+//         table.setAttribute('border', '1');
+//         table.setAttribute('id', 'table');
+//         shoppingItemList.appendChild(table);
+//         const headerRow = document.createElement('tr');
+//         headerRow.setAttribute('id', 'headerRow');
+//         const headers = ['Item', 'User', 'Date'];
+//         headers.forEach(headerText => {
+//             const th = document.createElement('th');
+//             th.setAttribute('id', 'th');
+//             th.textContent = headerText;
+//             headerRow.appendChild(th);
+//         });
+//         table.appendChild(headerRow);
+        
+
+//         Object.keys(items).forEach(key => {
+//             const { item, user, date, completed } = items[key];
+//             const row = document.createElement('tr');
+//             row.setAttribute('id', 'row');
+//             table.appendChild(row);
+
+//             [item, user, date].forEach(text => {
+//                 const td = document.createElement('td');
+//                 td.setAttribute('id', 'td');
+//                 td.textContent = text;
+//                 row.appendChild(td);
+//                 const editIcon = document.createElement('img');
+//                 editIcon.setAttribute('id','editImg');
+//                 editIcon.setAttribute('src','./images/pencil.png');
+//                 table.appendChild(editIcon);
+
+//             });
+
+//             if (completed) {
+//                 row.style.textDecoration = 'line-through';
+//             }
+
+//             row.addEventListener('click', () => {
+//                 const exactLocation = ref(dataBase, `shoppingList/${key}`);
+//                 update(exactLocation, { completed: !completed });
+//             });
+
+//             row.addEventListener('dblclick', () => {
+//                 const exactLocation = ref(dataBase, `shoppingList/${key}`);
+//                 remove(exactLocation);
+//             });
+//         });
+//     } else {
+//         shoppingItemList.innerHTML = 'No items here... add an item';
+//     }
+// });
+
 onValue(ref(dataBase, "shoppingList"), (snapshot) => {
     if (snapshot.exists()) {
         const items = snapshot.val();
@@ -280,12 +337,29 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
             row.setAttribute('id', 'row');
             table.appendChild(row);
 
-            [item, user, date].forEach(text => {
-                const td = document.createElement('td');
-                td.setAttribute('id', 'td');
-                td.textContent = text;
-                row.appendChild(td);
-            });
+            const itemTd = document.createElement('td');
+            itemTd.setAttribute('id', 'td');
+            itemTd.textContent = item;
+
+            // Create and append edit icon to the item column
+            const editIcon = document.createElement('img');
+            editIcon.setAttribute('id', 'editImg');
+            editIcon.setAttribute('src', './images/pencil.png');
+            editIcon.style.cursor = 'pointer';
+            editIcon.style.marginLeft = '10px';
+            itemTd.appendChild(editIcon);
+
+            const userTd = document.createElement('td');
+            userTd.setAttribute('id', 'td');
+            userTd.textContent = user;
+
+            const dateTd = document.createElement('td');
+            dateTd.setAttribute('id', 'td');
+            dateTd.textContent = date;
+
+            row.appendChild(itemTd);
+            row.appendChild(userTd);
+            row.appendChild(dateTd);
 
             if (completed) {
                 row.style.textDecoration = 'line-through';
@@ -300,11 +374,22 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
                 const exactLocation = ref(dataBase, `shoppingList/${key}`);
                 remove(exactLocation);
             });
+
+            // Add event listener to the edit icon
+            editIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const newInput = prompt("Edit item:", item);
+                if (newInput !== null && newInput.trim() !== "") {
+                    const exactLocation = ref(dataBase, `shoppingList/${key}`);
+                    update(exactLocation, { item: newInput });
+                }
+            });
         });
     } else {
         shoppingItemList.innerHTML = 'No items here... add an item';
     }
 });
+
 
 // Add event listener to dropbtn
 dropbtn.addEventListener('click', () => {
