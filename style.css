@@ -72,18 +72,18 @@ body {
 
 #Display:hover {
     background-color: #973ece;
-    color: #091b81;
+    color: #2c3faa;
     font-weight: bolder;
 }
 
 #Help:hover {
     background-color: #9b24e5;
-    color: #091b81;
+    color: #2c3faa;
     font-weight: bolder;
 }
 
 .icons:hover {
-    background-color: #3c0a5b;
+    background-color: #6d3590;
 }
 
 .icons img {
