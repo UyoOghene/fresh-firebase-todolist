@@ -26,6 +26,7 @@ const user = auth.currentUser;
 
 const googleBtn = document.querySelector('#googleBtn');
 const loginContainer = document.querySelector('.login-container');
+const dropdownContainer = document.querySelector('.dropdown-container');
 const container = document.querySelector('.container');
 const dropdown = document.querySelector('.dropdown');
 const dropbtn = document.querySelector('.dropbtn');
@@ -47,8 +48,11 @@ const signUpSubmit = document.querySelector('#signUpSubmit');
 const confirmpassword = document.querySelector('#confirmpassword');
 const signUpassword = document.querySelector('#signUpassword');
 const loginpassword = document.querySelector('#password');
-const notificationIcon = document.querySelector('#notification');
-const themeIcon = document.querySelector('#insights');
+const notificationIcon = document.querySelector('.notification');
+const messageIcon = document.querySelector('.messages');
+const help = document.querySelector('#Help');
+const profile = document.querySelector('#display');
+const themeIcon = document.querySelector('.insights');
 const card = document.querySelector('.card');
 const mainContainer = document.querySelector('.main-container');
 const themeImg = document.querySelector('#theme-img');
@@ -59,7 +63,11 @@ const totalSpan = document.querySelector('#total-span');
 
 themeIcon.addEventListener('click', () => {
     card.classList.toggle('dark-theme');
+    dropdown.classList.toggle('dark-theme');
     container.classList.toggle('dark-theme');
+    notificationIcon.classList.toggle('dark-theme');
+    messageIcon.classList.toggle('dark-theme');
+    themeIcon.classList.toggle('dark-theme');
     dropDownContent.classList.toggle('dark-theme');
 
     if(card.classList.contains ('dark-theme') ){
@@ -88,6 +96,13 @@ const applyThemePreference = (userId) => {
         }
     });
 };
+
+help.addEventListener('click',()=>{
+    window.location.href = "./help.html";
+})
+profile.addEventListener('click',()=>{
+    window.location.href = "./profile.html";
+})
 
 const onGoogleLogin = () => {
     const user = auth.currentUser;
