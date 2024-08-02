@@ -51,14 +51,19 @@ const notificationIcon = document.querySelector('#notification');
 const themeIcon = document.querySelector('#insights');
 const card = document.querySelector('.card');
 const mainContainer = document.querySelector('.main-container');
+const themeImg = document.querySelector('#theme-img');
+const priceInput = document.querySelector('#price-input');
 
 
 
 themeIcon.addEventListener('click', () => {
-    mainContainer.classList.toggle('dark-theme');
-    container.classList.toggle('dark-theme');
-    
     card.classList.toggle('dark-theme');
+    container.classList.toggle('dark-theme');
+    if(card.classList.contains ('dark-theme') ){
+        themeImg.src= './images/dark theme bulb.png';
+    }else{
+        themeImg.src= '/images/insights icon.png';
+    }
     const user = auth.currentUser;
     if (user) {
         const userId = user.uid;
@@ -215,7 +220,6 @@ const getUserDetails =(e)=>{
 signUpSubmit.addEventListener('click', getUserDetails);
 
 
-
 document.querySelector('#login').addEventListener('click', login);
 
 const addToCart = (e) => {
@@ -231,6 +235,7 @@ const addToCart = (e) => {
     }
 
     const item = inputField.value;
+    const price = priceInput.value;
     const d = new Date();
     const date = d.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -238,8 +243,8 @@ const addToCart = (e) => {
         day: '2-digit'
     });
 
-    if (name !== null && item.trim() !== '') {
-        push(ref(dataBase, "shoppingList"), { item, user: name, date, completed: false });
+    if (name !== null && item.trim() !== '' && price !== null) {
+        push(ref(dataBase, "shoppingList"), { item, user: name, date,price, completed: false });
         inputField.value = '';
     }
 };
@@ -259,63 +264,6 @@ const logout = () => {
 
 logoutBtn.addEventListener('click', logout);
 
-// onValue(ref(dataBase, "shoppingList"), (snapshot) => {
-//     if (snapshot.exists()) {
-//         const items = snapshot.val();
-//         shoppingItemList.innerHTML = '';
-//         const table = document.createElement('table');
-//         table.setAttribute('border', '1');
-//         table.setAttribute('id', 'table');
-//         shoppingItemList.appendChild(table);
-//         const headerRow = document.createElement('tr');
-//         headerRow.setAttribute('id', 'headerRow');
-//         const headers = ['Item', 'User', 'Date'];
-//         headers.forEach(headerText => {
-//             const th = document.createElement('th');
-//             th.setAttribute('id', 'th');
-//             th.textContent = headerText;
-//             headerRow.appendChild(th);
-//         });
-//         table.appendChild(headerRow);
-        
-
-//         Object.keys(items).forEach(key => {
-//             const { item, user, date, completed } = items[key];
-//             const row = document.createElement('tr');
-//             row.setAttribute('id', 'row');
-//             table.appendChild(row);
-
-//             [item, user, date].forEach(text => {
-//                 const td = document.createElement('td');
-//                 td.setAttribute('id', 'td');
-//                 td.textContent = text;
-//                 row.appendChild(td);
-//                 const editIcon = document.createElement('img');
-//                 editIcon.setAttribute('id','editImg');
-//                 editIcon.setAttribute('src','./images/pencil.png');
-//                 table.appendChild(editIcon);
-
-//             });
-
-//             if (completed) {
-//                 row.style.textDecoration = 'line-through';
-//             }
-
-//             row.addEventListener('click', () => {
-//                 const exactLocation = ref(dataBase, `shoppingList/${key}`);
-//                 update(exactLocation, { completed: !completed });
-//             });
-
-//             row.addEventListener('dblclick', () => {
-//                 const exactLocation = ref(dataBase, `shoppingList/${key}`);
-//                 remove(exactLocation);
-//             });
-//         });
-//     } else {
-//         shoppingItemList.innerHTML = 'No items here... add an item';
-//     }
-// });
-
 onValue(ref(dataBase, "shoppingList"), (snapshot) => {
     if (snapshot.exists()) {
         const items = snapshot.val();
@@ -326,7 +274,7 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
         shoppingItemList.appendChild(table);
         const headerRow = document.createElement('tr');
         headerRow.setAttribute('id', 'headerRow');
-        const headers = ['Item', 'User', 'Date'];
+        const headers = ['Item', 'User', 'Date', 'Price'];
         headers.forEach(headerText => {
             const th = document.createElement('th');
             th.setAttribute('id', 'th');
@@ -336,7 +284,7 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
         table.appendChild(headerRow);
 
         Object.keys(items).forEach(key => {
-            const { item, user, date, completed } = items[key];
+            const { item, user, date, price, completed } = items[key];
             const row = document.createElement('tr');
             row.setAttribute('id', 'row');
             table.appendChild(row);
@@ -345,7 +293,6 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
             itemTd.setAttribute('id', 'td');
             itemTd.textContent = item;
 
-            // Create and append edit icon to the item column
             const editIcon = document.createElement('img');
             editIcon.setAttribute('id', 'editImg');
             editIcon.setAttribute('src', './images/pencil.png');
@@ -360,10 +307,14 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
             const dateTd = document.createElement('td');
             dateTd.setAttribute('id', 'td');
             dateTd.textContent = date;
+            const priceTd = document.createElement('td');
+            priceTd.setAttribute('id', 'td');
+            priceTd.textContent = price;
 
             row.appendChild(itemTd);
             row.appendChild(userTd);
             row.appendChild(dateTd);
+            row.appendChild(priceTd);
 
             if (completed) {
                 row.style.textDecoration = 'line-through';

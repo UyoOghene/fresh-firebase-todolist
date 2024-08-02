@@ -293,6 +293,17 @@ body {
     height: 20px;
     width: 20px;
 } 
+
+#insights:hover{
+    height: 24px;
+}
+
+#insights img:hover{
+    height: 24px;
+    width: 24px;
+  
+}
+
 #picturebox{
 padding: 0px;
 margin: 0px;
@@ -425,6 +436,20 @@ align-items: center;
     margin: 5px;
     text-align: center;
     border: none;
+}
+#price-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10em;
+    height: 1.5em;
+    border-radius: 10px;
+    background-color: rgb(242, 238, 238);
+    margin: 5px;
+    text-align: center;
+    border: none;
+    overflow: hidden;
+
 }
 
 #add-button:hover {
