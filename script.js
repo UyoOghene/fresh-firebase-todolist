@@ -46,19 +46,22 @@ const form = document.querySelector('#form');
 const signUpSubmit = document.querySelector('#signUpSubmit');
 const confirmpassword = document.querySelector('#confirmpassword');
 const signUpassword = document.querySelector('#signUpassword');
-const password = document.querySelector('#password');
+const loginpassword = document.querySelector('#password');
 const notificationIcon = document.querySelector('#notification');
 const themeIcon = document.querySelector('#insights');
 const card = document.querySelector('.card');
 const mainContainer = document.querySelector('.main-container');
 const themeImg = document.querySelector('#theme-img');
 const priceInput = document.querySelector('#price-input');
+const totalSpan = document.querySelector('#total-span');
 
 
 
 themeIcon.addEventListener('click', () => {
     card.classList.toggle('dark-theme');
     container.classList.toggle('dark-theme');
+    dropDownContent.classList.toggle('dark-theme');
+
     if(card.classList.contains ('dark-theme') ){
         themeImg.src= './images/dark theme bulb.png';
     }else{
@@ -107,10 +110,11 @@ const onGoogleLogin = () => {
 const login = (e) => {
     e.preventDefault();
     const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    // const password = document.getElementById('password').value;
     localStorage.setItem('username', username);
+    
 
-    if (username !== '' && password.length >= 5) {
+    if (username !== '' && loginpassword.length >= 5) {
         const user = auth.currentUser;
         const usernamestore = localStorage.getItem('username');
         loginContainer.style.display = 'none';
@@ -131,6 +135,7 @@ const login = (e) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('signUpassword');
+    
     const passwordRequirements = document.getElementById('password-requirements');
 
     passwordInput.addEventListener('focus', () => {
@@ -156,6 +161,34 @@ document.addEventListener('DOMContentLoaded', () => {
             item.style.color = requirements[index] ? 'green' : 'red';
         });
     });
+
+    const loginRequirements = document.getElementById('login-password-requirements');
+    loginpassword.addEventListener('focus', () => {
+        loginRequirements.style.display = 'block';
+    });
+
+    loginpassword.addEventListener('blur', () => {
+        loginRequirements.style.display = 'none';
+    });
+
+    loginpassword.addEventListener('input', () => {
+        const value = loginpassword.value;
+        const requirements = [
+            value.length >= 8,
+            /[A-Z]/.test(value),
+            /[a-z]/.test(value),
+            /[0-9]/.test(value),
+            /[^A-Za-z0-9]/.test(value)
+        ];
+        
+        const listItems = loginRequirements.querySelectorAll('li');
+        listItems.forEach((item, index) => {
+            item.style.color = requirements[index] ? 'green' : 'red';
+        });
+    });
+
+
+    
 });
 
 
@@ -224,6 +257,8 @@ document.querySelector('#login').addEventListener('click', login);
 
 const addToCart = (e) => {
     e.preventDefault();
+    const newPrice = prompt("Add price:", 'price');
+
     let name;
     const user = JSON.parse(localStorage.getItem('userStore'));
 
@@ -235,7 +270,7 @@ const addToCart = (e) => {
     }
 
     const item = inputField.value;
-    const price = priceInput.value;
+    const price = newPrice;
     const d = new Date();
     const date = d.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -243,7 +278,7 @@ const addToCart = (e) => {
         day: '2-digit'
     });
 
-    if (name !== null && item.trim() !== '' && price !== null) {
+    if (name !== null && item.trim() !== '' && price!== null) {
         push(ref(dataBase, "shoppingList"), { item, user: name, date,price, completed: false });
         inputField.value = '';
     }
@@ -437,25 +472,26 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
             });
 
             totalPrice += parseInt(price);
+            totalSpan.textContent = totalPrice;
+
         });
-
         
-        const totalRow = document.createElement('tr');
-        totalRow.setAttribute('id', 'totalRow');
+        // const totalRow = document.createElement('p');
+        // totalRow.setAttribute('id', 'totalP');
 
-        const emptyTd1 = document.createElement('td');
-        const emptyTd2 = document.createElement('td');
-        const totalLabelTd = document.createElement('td');
-        totalLabelTd.textContent = 'Total Price';
-        const totalPriceTd = document.createElement('td');
-        totalPriceTd.textContent = totalPrice;
+        // const emptyTd1 = document.createElement('td');
+        // const emptyTd2 = document.createElement('td');
+        // const totalLabelTd = document.createElement('p');
+        // totalLabelTd.textContent = 'Total Price';
+        // const totalPriceTd = document.createElement('td');
+        // totalPriceTd.textContent = totalPrice;
 
-        totalRow.appendChild(emptyTd1);
-        totalRow.appendChild(emptyTd2);
-        totalRow.appendChild(totalLabelTd);
-        totalRow.appendChild(totalPriceTd);
+        // totalRow.appendChild(emptyTd1);
+        // totalRow.appendChild(emptyTd2);
+        // totalRow.appendChild(totalLabelTd);
+        // totalRow.appendChild(totalPriceTd);
 
-        table.appendChild(totalRow);
+        // table.appendChild(totalRow);
 
     } else {
         shoppingItemList.innerHTML = 'No items here... add an item';

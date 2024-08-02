@@ -115,6 +115,17 @@
                 <input type="text" id="username" name="username">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password">
+                <div id="login-password-requirements" class="requirements">
+                    <p>Password must contain:</p>
+                    <ul>
+                        <li>At least 8 characters</li>
+                        <li>One uppercase letter</li>
+                        <li>One lowercase letter</li>
+                        <li>One number</li>
+                        <li>One special character</li>
+                    </ul>
+                </div>
+
                 <button id="login" type="submit">Login</button>
                 <button type="button" id="googleBtn">Login with Google<i class="fa fa-google-plus" ></i></button>
                 <button id="signup-btn">Create Account</button>
@@ -155,9 +166,9 @@
                     </button>
                     <div class="dropdown-content">
                         <div id="namebox" ></div>
+                        <div id="Help" class="icons"><img src="./images/help-252.png" class="dropicons">Help</div>            
+                        <div id="Display" class="icons"><img src="./images/display icon.jpeg" class="dropicons" alt="screen image">Display</div>
                         <button id="logoutBtn"  class="icons"> <img src="./images/logout icon.jpg" class="dropicons" alt="">Logout</button>
-                        <div id="Display" class="icons"><img src="./images/display icon.jpeg" class="dropicons" alt="">Display</div>
-                        <div id="Help" class="icons"><img src="./images/help-252.png" class="dropicons"  >Help</div>            
                     </div>
                 </div>
             </div>
@@ -165,10 +176,11 @@
                 <img src="./cart.png" id="cart">
                 <form action="" id="add-btn-field">
                     <input type="text" placeholder="type an item" id="input-field">
-                    <input type="number" placeholder="type it's price" id="price-input">
+                    <!-- <input type="number" placeholder="type it's price" id="price-input"> -->
                     <button id="add-button">Add to cart</button>
                 </form>
                 <div id="shopping-item-list"></div>
+                <div id="total-price"><p>Total :<span id="total-span"></span></p></div>
             </div>
         </div>
     </div>

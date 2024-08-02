@@ -268,6 +268,7 @@ body {
     border: none;
     right: 0;
     background-color: #f0dbec;
+
 }
 
 #messages  {
@@ -334,10 +335,13 @@ align-items: center;
 
 .dropdown:hover .dropdown-content {
     display: block;
+    color: #72addb;;
 }
 
 .dropdown:hover .dropbtn {
     background-color: #c795e7;
+    color: #72addb;
+
 }
 
 #titlediv {
@@ -376,7 +380,7 @@ align-items: center;
     padding: 5px;
     font-size: 12px;
     font-weight: bold;
-    color: #07080e;
+    color: #a277d0;
 }
 
 #logoutBtn {
@@ -391,7 +395,6 @@ align-items: center;
     border-radius: 20px;
     border: none;
     font-weight: bold;
-    font-size: medium;
 }
 
 .card {
@@ -546,7 +549,11 @@ align-items: center;
 
 .dark-theme {
     background-color: #0c0c0cb1;
-    /* color: #ffffff; */
+    color: #ffffff;
+}
+.dark-theme:hover {
+    background-color: #0c0c0cb1;
+    color: #ffffff;
 }
 
 .dark-theme table th,
@@ -556,8 +563,14 @@ align-items: center;
 
 .dark-theme input {
     background-color: #333;
+    color: #de9ecbec;
+}
+.dark-theme p {
+    background-color: #333;
     color: #fff;
 }
+
+
 
 .dark-theme button {
     background-color: #8e1bb8;
