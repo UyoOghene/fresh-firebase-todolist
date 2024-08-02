@@ -264,6 +264,99 @@ const logout = () => {
 
 logoutBtn.addEventListener('click', logout);
 
+// onValue(ref(dataBase, "shoppingList"), (snapshot) => {
+//     if (snapshot.exists()) {
+//         const items = snapshot.val();
+//         shoppingItemList.innerHTML = '';
+//         const table = document.createElement('table');
+//         table.setAttribute('border', '1');
+//         table.setAttribute('id', 'table');
+//         shoppingItemList.appendChild(table);
+//         const headerRow = document.createElement('tr');
+//         headerRow.setAttribute('id', 'headerRow');
+//         const headers = ['Item', 'User', 'Date', 'Price'];
+//         headers.forEach(headerText => {
+//             const th = document.createElement('th');
+//             th.setAttribute('id', 'th');
+//             th.textContent = headerText;
+//             headerRow.appendChild(th);
+//         });
+//         table.appendChild(headerRow);
+
+//         Object.keys(items).forEach(key => {
+//             const { item, user, date, price, completed } = items[key];
+//             const row = document.createElement('tr');
+//             row.setAttribute('id', 'row');
+//             table.appendChild(row);
+
+//             const itemTd = document.createElement('td');
+//             itemTd.setAttribute('id', 'td');
+//             itemTd.textContent = item;
+
+//             const editIcon = document.createElement('img');
+//             editIcon.setAttribute('id', 'editImg');
+//             editIcon.setAttribute('src', './images/pencil.png');
+//             editIcon.style.cursor = 'pointer';
+//             editIcon.style.marginLeft = '10px';
+//             itemTd.appendChild(editIcon);
+
+//             const userTd = document.createElement('td');
+//             userTd.setAttribute('id', 'td');
+//             userTd.textContent = user;
+
+//             const dateTd = document.createElement('td');
+//             dateTd.setAttribute('id', 'td');
+//             dateTd.textContent = date;
+
+//             const priceTd = document.createElement('td');
+//             priceTd.setAttribute('id', 'td');
+//             priceTd.textContent = price;
+
+//             const totalTd = document.createElement('td');
+//             totalTd.setAttribute('id', 'td');
+            
+//             for(let i=0; i<= price.length; i++){
+//                let totalPrice = price[i] + price;
+//                return totalPrice
+//             }
+//             totalTd.textContent = totalPrice;
+
+
+
+//             row.appendChild(itemTd);
+//             row.appendChild(userTd);
+//             row.appendChild(dateTd);
+//             row.appendChild(priceTd);
+
+//             if (completed) {
+//                 row.style.textDecoration = 'line-through';
+//             }
+
+//             row.addEventListener('click', () => {
+//                 const exactLocation = ref(dataBase, `shoppingList/${key}`);
+//                 update(exactLocation, { completed: !completed });
+//             });
+
+//             row.addEventListener('dblclick', () => {
+//                 const exactLocation = ref(dataBase, `shoppingList/${key}`);
+//                 remove(exactLocation);
+//             });
+
+//             editIcon.addEventListener('click', (e) => {
+//                 e.stopPropagation();
+                
+//                 const newInput = prompt("Edit item:", item);
+//                 if (newInput !== null && newInput.trim() !== "") {
+//                     const exactLocation = ref(dataBase, `shoppingList/${key}`);
+//                     update(exactLocation, { item: newInput });
+//                 }
+//             });
+//         });
+//     } else {
+//         shoppingItemList.innerHTML = 'No items here... add an item';
+//     }
+// });
+
 onValue(ref(dataBase, "shoppingList"), (snapshot) => {
     if (snapshot.exists()) {
         const items = snapshot.val();
@@ -282,6 +375,8 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
             headerRow.appendChild(th);
         });
         table.appendChild(headerRow);
+
+        let totalPrice = 0;
 
         Object.keys(items).forEach(key => {
             const { item, user, date, price, completed } = items[key];
@@ -307,6 +402,7 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
             const dateTd = document.createElement('td');
             dateTd.setAttribute('id', 'td');
             dateTd.textContent = date;
+
             const priceTd = document.createElement('td');
             priceTd.setAttribute('id', 'td');
             priceTd.textContent = price;
@@ -339,7 +435,28 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
                     update(exactLocation, { item: newInput });
                 }
             });
+
+            totalPrice += parseInt(price);
         });
+
+        
+        const totalRow = document.createElement('tr');
+        totalRow.setAttribute('id', 'totalRow');
+
+        const emptyTd1 = document.createElement('td');
+        const emptyTd2 = document.createElement('td');
+        const totalLabelTd = document.createElement('td');
+        totalLabelTd.textContent = 'Total Price';
+        const totalPriceTd = document.createElement('td');
+        totalPriceTd.textContent = totalPrice;
+
+        totalRow.appendChild(emptyTd1);
+        totalRow.appendChild(emptyTd2);
+        totalRow.appendChild(totalLabelTd);
+        totalRow.appendChild(totalPriceTd);
+
+        table.appendChild(totalRow);
+
     } else {
         shoppingItemList.innerHTML = 'No items here... add an item';
     }
