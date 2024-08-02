@@ -26,7 +26,7 @@ const user = auth.currentUser;
 
 const googleBtn = document.querySelector('#googleBtn');
 const loginContainer = document.querySelector('.login-container');
-const container = document.querySelector('#container');
+const container = document.querySelector('.container');
 const dropdown = document.querySelector('.dropdown');
 const dropbtn = document.querySelector('.dropbtn');
 const dropDownContent = document.querySelector('.dropdown-content');
@@ -50,10 +50,14 @@ const password = document.querySelector('#password');
 const notificationIcon = document.querySelector('#notification');
 const themeIcon = document.querySelector('#insights');
 const card = document.querySelector('.card');
+const mainContainer = document.querySelector('.main-container');
 
 
 
 themeIcon.addEventListener('click', () => {
+    mainContainer.classList.toggle('dark-theme');
+    container.classList.toggle('dark-theme');
+    
     card.classList.toggle('dark-theme');
     const user = auth.currentUser;
     if (user) {
@@ -375,9 +379,9 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
                 remove(exactLocation);
             });
 
-            // Add event listener to the edit icon
             editIcon.addEventListener('click', (e) => {
                 e.stopPropagation();
+                
                 const newInput = prompt("Edit item:", item);
                 if (newInput !== null && newInput.trim() !== "") {
                     const exactLocation = ref(dataBase, `shoppingList/${key}`);
