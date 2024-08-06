@@ -1,4 +1,127 @@
+/* General Styles */
 body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.main-container {
+    width: 350px;
+    background-color: #ffffff;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 2px solid #f6d365; /* Interesting card border color */
+    background: linear-gradient(145deg, #a7a3e4, #dd85fd); /* Interesting card background gradient */
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    background-color: #e9f7ef;
+    border-color: #80bdff;
+    outline: none;
+}
+
+.requirements {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.requirements ul {
+    padding-left: 20px;
+}
+
+.requirements li {
+    margin-bottom: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#login {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+#googleBtn {
+    background-color: #DB4437;
+    color: #fff;
+}
+
+#signup-btn,
+#signUpSubmit {
+    background-color: #28a745;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+#googleBtn i {
+    margin-left: 10px;
+}
+
+form {
+    display: none;
+}
+
+form.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* body {
     position: relative;
     font-family: Arial, sans-serif;
     display: flex;
@@ -25,11 +148,12 @@ body {
     display: block;
     margin: 10px 0 5px;
 }
-
+ */
 
 .requirements {
     display: none;
-    background-color: #3e979f;
+    background-color: none;
+    opacity: 1;
     border: none;
     padding: 1px;
     border-radius: 10px;
@@ -120,7 +244,7 @@ body {
     flex-direction: column;
     width: 300px;
     padding: 5px;
-    background-color: rgb(183, 213, 249);
+    background-color: rgb(206, 206, 239);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     row-gap: 5px;
@@ -193,7 +317,7 @@ body {
 }
 
 #signup-btn{
-    background-color: #bc2599;
+    background-color: #d588c3;
     border: none;
     border-radius: 10px;
     color: white;
