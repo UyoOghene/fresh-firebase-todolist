@@ -165,6 +165,7 @@ form.active {
     width: 20px;
     font-size: 15px;
     background-color: none;
+    border-radius: 100%;
     /* opacity: 0.1; */
 }
 
