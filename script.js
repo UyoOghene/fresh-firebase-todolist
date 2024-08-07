@@ -71,7 +71,7 @@ themeIcon.addEventListener('click', () => {
 
     if(card.classList.contains ('dark-theme') ){
         themeImg.src= './images/dark theme bulb.png';
-    }else{
+    }else {
         themeImg.src= '/images/insights icon.png';
     }
     const user = auth.currentUser;
@@ -82,7 +82,6 @@ themeIcon.addEventListener('click', () => {
     }
 });
 
-
 const applyThemePreference = (userId) => {
     const themeRef = ref(dataBase, `users/${userId}/theme`);
     onValue(themeRef, (snapshot) => {
@@ -90,8 +89,22 @@ const applyThemePreference = (userId) => {
             const themePreference = snapshot.val();
             if (themePreference === 'dark') {
                 card.classList.add('dark-theme');
-            } else {
-                card.classList.remove('dark-theme');
+                dropdown.classList.add('dark-theme');
+                container.classList.add('dark-theme');
+                notificationIcon.classList.add('dark-theme');
+                messageIcon.classList.add('dark-theme');
+                themeIcon.classList.add('dark-theme');
+                dropDownContent.classList.add('dark-theme');
+            
+            } 
+            if(themePreference === 'light' ) {
+            card.classList.remove('dark-theme');
+            dropdown.classList.remove('dark-theme');
+            container.classList.remove('dark-theme');
+            notificationIcon.classList.remove('dark-theme');
+            messageIcon.classList.remove('dark-theme');
+            themeIcon.classList.remove('dark-theme');
+            dropDownContent.classList.remove('dark-theme');
             }
         }
     });
