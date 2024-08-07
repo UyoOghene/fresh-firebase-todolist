@@ -25,6 +25,7 @@ const provider = new GoogleAuthProvider();
 
 const googleBtn = document.querySelector('#googleBtn');
 const loginContainer = document.querySelector('.login-container');
+const loginRequirements = document.querySelector('#login-password-requirements');
 const dropdownContainer = document.querySelector('.dropdown-container');
 const container = document.querySelector('.container');
 const dropdown = document.querySelector('.dropdown');
@@ -308,10 +309,70 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
     }
 });
 
-// Add event listener to dropbtn
 dropbtn.addEventListener('click', () => {
     dropDownContent.style.display = dropDownContent.style.display === 'block' ? 'none' : 'block';
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('signUpassword');
+    
+    const passwordRequirements = document.getElementById('password-requirements');
+
+    passwordInput.addEventListener('focus', () => {
+        passwordRequirements.style.display = 'block';
+    });
+
+    passwordInput.addEventListener('blur', () => {
+        passwordRequirements.style.display = 'none';
+    });
+
+    passwordInput.addEventListener('input', () => {
+        const value = passwordInput.value;
+        const requirements = [
+            value.length >= 8,
+            /[A-Z]/.test(value),
+            /[a-z]/.test(value),
+            /[0-9]/.test(value),
+            /[^A-Za-z0-9]/.test(value)
+        ];
+        
+        const listItems = passwordRequirements.querySelectorAll('li');
+        listItems.forEach((item, index) => {
+            item.style.color = requirements[index] ? 'green' : 'red';
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    loginpassword.addEventListener('focus', () => {
+        loginRequirements.style.display = 'block';
+    });
+
+    loginpassword.addEventListener('blur', () => {
+        loginRequirements.style.display = 'none';
+    });
+
+    loginpassword.addEventListener('input', () => {
+        const value = loginpassword.value;
+        const requirements = [
+            value.length >= 8,
+            /[A-Z]/.test(value),
+            /[a-z]/.test(value),
+            /[0-9]/.test(value),
+            /[^A-Za-z0-9]/.test(value)
+        ];
+        
+        const listItems2 = loginRequirements.querySelectorAll('li');
+        listItems2.forEach((item2, index) => {
+            item2.style.color = requirements[index] ? 'green' : 'red';
+        });
+    });
+})
+  
+
+
+
 
 
 
