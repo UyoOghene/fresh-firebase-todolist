@@ -383,7 +383,7 @@ form.active {
 }
 
 .dropdown-content {
-    display: flex;
+    display: none;
     justify-content: center;
     flex-wrap: wrap;
     font-size: 10px;
