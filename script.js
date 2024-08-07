@@ -60,6 +60,28 @@ const priceInput = document.querySelector('#price-input');
 const totalSpan = document.querySelector('#total-span');
 
 
+themeIcon.addEventListener('click', () => {
+    card.classList.toggle('dark-theme');
+    dropdown.classList.toggle('dark-theme');
+    container.classList.toggle('dark-theme');
+    notificationIcon.classList.toggle('dark-theme');
+    messageIcon.classList.toggle('dark-theme');
+    themeIcon.classList.toggle('dark-theme');
+    dropDownContent.classList.toggle('dark-theme');
+
+    if(card.classList.contains ('dark-theme') ){
+        themeImg.src= './images/dark theme bulb.png';
+    }else{
+        themeImg.src= '/images/insights icon.png';
+    }
+    const user = auth.currentUser;
+    if (user) {
+        const userId = user.uid;
+        const themePreference = card.classList.contains('dark-theme') ? 'dark' : 'light';
+        update(ref(dataBase, `users/${userId}`), { theme: themePreference });
+    }
+});
+
 
 const applyThemePreference = (userId) => {
     const themeRef = ref(dataBase, `users/${userId}/theme`);
@@ -806,4 +828,4 @@ document.addEventListener('DOMContentLoaded', () => {
 // // Add event listener to dropbtn
 // dropbtn.addEventListener('click', () => {
 //     dropDownContent.style.display = dropDownContent.style.display === 'block' ? 'none' : 'block';
-// });
+// })
