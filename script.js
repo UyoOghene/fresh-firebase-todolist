@@ -318,6 +318,11 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
                     const exactLocation = ref(dataBase, `shoppingList/${key}`);
                     update(exactLocation, { item: newInput });
                 }
+                const newEditPrice = prompt("Edit price:", price);
+                if (newEditPrice !== null && newEditPrice.trim() !== "") {
+                    const exactLocation = ref(dataBase, `shoppingList/${key}`);
+                    update(exactLocation, { price: newEditPrice });
+                }
             });
 
             totalPrice += parseInt(price);
@@ -325,7 +330,6 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
 
         });
         
-
     } else {
         shoppingItemList.innerHTML = 'No items here... add an item';
     }
