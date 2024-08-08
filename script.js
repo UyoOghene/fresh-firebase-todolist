@@ -331,7 +331,7 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
                     const exactLocation = ref(dataBase, `shoppingList/${key}`);
                     update(exactLocation, { item: newInput });
                 }
-                const newEditPrice = prompt("Edit price:", price);
+                const newEditPrice = prompt("Edit price:", 200);
                 if (newEditPrice !== null && newEditPrice.trim() !== "") {
                     const exactLocation = ref(dataBase, `shoppingList/${key}`);
                     update(exactLocation, { price: newEditPrice });
