@@ -117,28 +117,25 @@ signupBtn.addEventListener('click', (e) => {
     titleh2.textContent = 'Sign UP';
 });
 
-signUpSubmit.addEventListener('click', (e) => {
+document.querySelector('#signUpSubmit').addEventListener('click', (e) => {
     e.preventDefault();
-    if (email.value === '' || firstname.value === '' || signUpassword.value === '' || confirmpassword.value === '') {
-        alert('Please fill up all the fields');
-    } else if (signUpassword.value !== confirmpassword.value) {
-        alert('Passwords do not match');
-        confirmpassword.value = '';
-        signUpassword.value = '';
-    } else {
-        createUserWithEmailAndPassword(auth, email.value, signUpassword.value)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log('User signed up:', user);
-                form.style.display = 'flex';
-                signUpform.style.display = 'none';
-                titleh2.textContent = 'Log In';
-            })
-            .catch((error) => {
-                console.error('Sign up error', error.code, error.message);
-            });
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('signUpassword').value;
+    if(password !== "" && email !== ""){
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log('User signed up:', user);
+        })
+        .catch((error) => {
+            console.error('Sign up error:', error);
+            alert('This email already has an account!')
+        });
+    }else{
+        alert('fill out all the fields!');
     }
-});
+})
+
 const onGoogleLogin = () => {
     const user = auth.currentUser;
     if (user) {
@@ -301,7 +298,7 @@ onValue(ref(dataBase, "shoppingList"), (snapshot) => {
             dateTd.textContent = date;
 
             const priceTd = document.createElement('td');
-            priceTd.setAttribute('id', 'td');
+            priceTd.setAttribute('id', 'pricetd');
             priceTd.textContent = price;
 
             row.appendChild(itemTd);
@@ -409,17 +406,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })
 
-help.addEventListener('click',()=>{
-    window.location.href = "./help.html";
-})
+// help.addEventListener('click',()=>{
+//     window.location.href = "./help.html";
+// })
 
-profile.addEventListener('click',()=>{
-    window.location.href = "./profile.html";
-})
-
-
-
-
-
-
-
+// profile.addEventListener('click',()=>{
+//     window.location.href = "./profile.html";
+// })};

@@ -52,6 +52,8 @@ input[type="password"]:focus {
     background-color: #e9f7ef;
     border-color: #80bdff;
     outline: none;
+    padding: 5px;
+
 }
 
 .requirements {
@@ -80,12 +82,20 @@ button {
 }
 
 #login {
-    background-color: #007BFF;
+    background-color: #167f0e;
     color: #fff;
+    color: #fff;
+    width: 80%;
+    height: 1.5em;
+    margin-top: 10px;
+    justify-content: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
+
 }
 
 #googleBtn {
-    background-color: #DB4437;
+    background-color: #4127b6;
     color: #fff;
 }
 
@@ -93,6 +103,13 @@ button {
 #signUpSubmit {
     background-color: #28a745;
     color: #fff;
+    width: 80%;
+    height: 1.5em;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    justify-content: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 button:hover {
@@ -104,11 +121,8 @@ button:hover {
     margin-left: 10px;
 }
 
-form {
-    display: none;
-}
 
-form.active {
+#form.active {
     display: block;
     animation: fadeIn 0.5s ease;
 }
@@ -217,11 +231,13 @@ form.active {
     align-items: center;
     flex-direction: column;
     padding: 1px;
-    row-gap: 1px;
+    width: 90%;
+    height: 100%;
+    row-gap: 2px;
 
 }
 #signUp label {
-    height: 1.5em;
+    height: 1.2em;
     margin : 1px;
     padding: 1px;
 }
@@ -229,7 +245,7 @@ form.active {
 
 #signUp input {
     height: 1.5em;
-    margin-bottom: 1px;
+    margin: 1px;
 }
 
 
@@ -238,12 +254,14 @@ form.active {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 1px;
     width: 300px;
-    padding: 5px;
+    height: 85%;
+    row-gap: 2px;
     background-color: rgb(206, 206, 239);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    row-gap: 5px;
+
 }
 
 .login-container h2 {
@@ -272,8 +290,11 @@ form.active {
     align-items: center;
     flex-direction: column;
     row-gap: 5px;
-    padding: 5px;
-    margin: 2px;
+    padding: 3px;
+    margin: 1px;
+    width: 95%;
+    margin-top: 0px;
+
 }
 #signUpassword{
     height: 2em;
@@ -281,12 +302,12 @@ form.active {
 }
 
 #form input{
-    height: 2em;
+    height: 1.5em;
     margin: 2px;
 
 }
 
-#login {
+/* #login {
     width: 100%;
     padding: 10px;
     background-color: #28a745;
@@ -294,7 +315,7 @@ form.active {
     border-radius: 10px;
     color: white;
     font-size: 16px;
-}
+} */
 
 .fa-google-plus {
     padding-left: 5px;
@@ -303,22 +324,30 @@ form.active {
 }
 
 #googleBtn {
-    width: 100%;
+    /* width: 100%;
     padding: 10px;
     background-color: #283ba7;
     border: none;
     border-radius: 10px;
     color: white;
-    font-size: 16px;
+    font-size: 16px; */
+    color: #fff;
+    width: 80%;
+    height: 1.5em;
+    margin-top: 10px;
+    justify-content: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
+
 }
 
 #signup-btn{
     background-color: #d588c3;
-    border: none;
+    /* border: none;
     border-radius: 10px;
     color: white;
     font-size: 16px;
-    padding: 5px;
+    padding: 5px; */
 
 }
 
@@ -503,17 +532,18 @@ align-items: center;
 
 }
 
-#titlediv {
+#titleh2 {
     flex-direction: column;
     text-align: center;
-    margin: 10px;
-    width: 40em;
-    height: 2em;
-    background-color: #d14bb8;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    width: 50%;
+    height: 1.5em;
+    background-color: none;
     border: none;
-    border-radius: 20px;
-    padding: 5px;
-    font-size: 5px;
+    /* border-radius: 20px; */
+    padding: 1px;
+    font-size: 1.5em;
 }
 
 #imgbox {
@@ -521,6 +551,10 @@ align-items: center;
     height: 3em;
     width: 3em;
     border-radius: 100%;
+}
+#labelfirstname{
+    margin-top: 0px;
+
 }
 
 #namebox {
@@ -609,6 +643,7 @@ align-items: center;
     text-align: center;
     border: none;
 }
+
 #price-input {
     display: flex;
     justify-content: center;
@@ -664,9 +699,13 @@ align-items: center;
     /* border: 2px solid white; */
     border: none;
 }
+#pricetd{
+    text-align: right;
+
+}
 
 #itemTxtid {
-    text-align: center;
+    text-align: left;
     padding: 0px;
     background-color: rgb(0, 119, 255);
     border-radius: 20px;
@@ -675,7 +714,7 @@ align-items: center;
 }
 
 #nameTxtid {
-    text-align: center;
+    text-align: left;
     padding: 0px;
     background-color: rgb(219, 221, 224);
     width: 30%;
